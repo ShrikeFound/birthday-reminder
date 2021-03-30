@@ -3,8 +3,18 @@ import { useBirthdays } from '../../context/birthdays.context'
 import BirthdayItem from './BirthdayItem'
 
 const BirthdayList = (userID) => {
-
+  const today = new Date();
+  console.log("today: ", today);
   const birthdays = useBirthdays()
+  
+  birthdays.sort((a, b) => {
+    console.log(today.getFullYear(),a.birthmonth,b.birthday)
+    const nextBirthdayA = new Date(today.getFullYear(),a.birthmonth,b.birthday)
+    const nextBirthdayB = new Date(today.getFullYear(), b.birthmonth, b.birthday)
+    console.log(nextBirthdayA,nextBirthdayB)
+    return nextBirthdayA - nextBirthdayB
+  })
+
   console.log("these birthdays: ",birthdays)
   console.log("length: ", birthdays.length)
   

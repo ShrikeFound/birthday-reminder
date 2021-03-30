@@ -29,7 +29,10 @@ const CreateBirthday = () => {
     const formattedBirthday = (new Date(formValue.birthdate)).getTime()
     const birthdayData = {
       name: formValue.name,
-      birthday: formattedBirthday,
+      birthdate: formattedBirthday,
+      birthmonth: formValue.birthdate.getMonth(),
+      birthday: formValue.birthdate.getDate(),
+      birthyear: formValue.birthdate.getFullYear(),
       createdAt: firebase.database.ServerValue.TIMESTAMP,
     }
 
@@ -59,7 +62,7 @@ const CreateBirthday = () => {
       </Button>
 
 
-      <Modal show={isOpen} onHide={close} style={{maxWidth: "100%"}}>
+      <Modal show={isOpen} onHide={close} style={{maxWidth: "90%"}}>
         <Modal.Header><Modal.Title>New Birthday</Modal.Title></Modal.Header>
 
         <Modal.Body>

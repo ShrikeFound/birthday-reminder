@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Icon, Grid } from 'rsuite'
+import { Button, Icon } from 'rsuite'
 import { useUser } from '../../context/user.context'
 import { db } from '../../misc/firebase'
 
@@ -9,7 +9,7 @@ const BirthdayItem = ({ birthday }) => {
   console.log(new Date(birthday.birthday))
 
   const handleDelete = () => {
-    const birthdayRef = db.ref(`birthdays/${user.uid}`)
+    const birthdayRef = db.ref(`birthdays/${user.uid}/${birthday.id}`)
     birthdayRef.remove()
   }
 

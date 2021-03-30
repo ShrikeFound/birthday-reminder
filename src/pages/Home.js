@@ -20,11 +20,11 @@ const Home = () => {
         <Row>
           <Col xs={24} md={12} mdOffset={6}>
             <div>
-              <div className="logo-large mt-page">
+              <div className="logo-large mt-3">
                   <img alt="cupcake logo" src={cupcakeLogo} />
                 </div>
-            <h1>Birthday Reminders</h1>
-            <h3>for {user.name}</h3>
+            <h2>Birthday Reminders</h2>
+            <h6>for {user.name}</h6>
             <Button className="mt-1 bt-1" onClick={handleSignOut}>Sign Out</Button>
             </div>
           
