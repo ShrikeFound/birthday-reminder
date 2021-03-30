@@ -5,6 +5,7 @@ import CreateBirthday from '../components/CreateBirthday';
 import { BirthdaysProvider } from '../context/birthdays.context';
 import { useUser } from '../context/user.context'
 import { auth } from '../misc/firebase';
+import cupcakeLogo from '../images/cupcake.svg'
 
 const Home = () => {
 
@@ -19,6 +20,9 @@ const Home = () => {
         <Row>
           <Col xs={24} md={12} mdOffset={6}>
             <div>
+              <div className="logo-large mt-page">
+                  <img alt="cupcake logo" src={cupcakeLogo} />
+                </div>
             <h1>Birthday Reminders</h1>
             <h3>for {user.name}</h3>
             <Button onClick={handleSignOut}>Sign Out</Button>
