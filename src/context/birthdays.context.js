@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { db } from "../misc/firebase";
 import { useUser } from "./user.context";
 
@@ -23,15 +23,18 @@ export const BirthdaysProvider = ({ children }) => {
       const data = transformToArray(snapshot.val())
       // console.log(data)
       setBirthdays(data)
-    })
+    },[])
 
 
     return () => {
       birthdayListRef.off();
     }
 
-  })
+  },[user.uid])
 
 
   return <BirthdaysContext.Provider value={birthdays}>{children}</BirthdaysContext.Provider>
 }
+
+
+export const useBirthdays = () => useContext(BirthdaysContext)

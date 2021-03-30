@@ -29,3 +29,16 @@ body,
     background: darken(#ddd, 20%);
   }
 }
+
+.birthday-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.birthday-item {
+  display: grid;
+  grid-template-columns: max-content min-content;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}

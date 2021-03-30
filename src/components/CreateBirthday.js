@@ -8,7 +8,7 @@ import { useUser } from '../context/user.context'
 
 const INITIAL_FORM = {
   name: "",
-  birthdate: ""
+  birthdate: new Date()
 }
 
 const CreateBirthday = () => {
@@ -26,12 +26,14 @@ const CreateBirthday = () => {
   
   const handleFormSubmit = async () => {
     setLoading(true)
+    const formattedBirthday = (new Date(formValue.birthdate)).getTime()
     const birthdayData = {
       name: formValue.name,
-      birthday: Date(formValue.birthdate),
+      birthday: formattedBirthday,
       createdAt: firebase.database.ServerValue.TIMESTAMP,
     }
 
+    console.log(typeof birthdayData.birthday, typeof birthdayData.createdAt)
     try {
       await db.ref(`birthdays/${user.uid}`).push(birthdayData);
 
