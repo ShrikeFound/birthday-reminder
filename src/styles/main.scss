@@ -37,7 +37,7 @@ body,
 
 .birthday-item {
   display: grid;
-  grid-template-columns: max-content min-content;
+  grid-template-columns: minmax(auto, max-content) min-content;
   align-items: center;
   justify-content: center;
   text-align: left;

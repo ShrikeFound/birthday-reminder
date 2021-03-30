@@ -5,7 +5,6 @@ import { useUser } from '../context/user.context';
 
 const PrivateRoute = ({ children, ...routeProps }) => {
   const { user,loading } = useUser();
-  console.log("loading: ",loading)
 
   if (loading && !user) {
     return (
