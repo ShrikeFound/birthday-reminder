@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react'
-import { Button, Grid } from 'rsuite'
+import { Button, Divider, Grid, Row,Col } from 'rsuite'
+import BirthdayList from '../components/birthdays/BirthdayList';
 import CreateBirthday from '../components/CreateBirthday';
+import { BirthdaysProvider } from '../context/birthdays.context';
 import { useUser } from '../context/user.context'
 import { auth } from '../misc/firebase';
 
@@ -12,18 +14,26 @@ const Home = () => {
   },[])
 
   return (
-    <Grid fluid className="h-100 text-center">
-      <div>
-        <h1>Birthday Reminders</h1>
-        <h3>for {user.name}</h3>
-        <Button onClick={handleSignOut}>Sign Out</Button>
-      </div>
-      
-      <div>
-        <CreateBirthday/>  
-        Birthday List
-      </div>
-    </Grid>
+    <BirthdaysProvider>
+      <Grid fluid className="h-100 text-center">        
+        <Row>
+          <Col xs={24} md={12} mdOffset={6}>
+            <div>
+            <h1>Birthday Reminders</h1>
+            <h3>for {user.name}</h3>
+            <Button onClick={handleSignOut}>Sign Out</Button>
+            </div>
+          
+            <div>
+            <CreateBirthday/>  
+              <Divider>Birthdays</Divider>
+              <BirthdayList/>
+            </div>
+          </Col>
+        </Row>
+      </Grid>
+    </BirthdaysProvider>
+    
   )
 }
 
