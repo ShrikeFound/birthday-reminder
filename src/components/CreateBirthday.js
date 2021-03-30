@@ -54,7 +54,7 @@ const CreateBirthday = () => {
 
   return (
     <div>
-      <Button color="green" onClick={open}>
+      <Button className="mt-1" color="green" onClick={open}>
         <Icon icon="birthday-cake" /> Add New Birthday
       </Button>
 

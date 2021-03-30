@@ -25,7 +25,7 @@ const Home = () => {
                 </div>
             <h1>Birthday Reminders</h1>
             <h3>for {user.name}</h3>
-            <Button onClick={handleSignOut}>Sign Out</Button>
+            <Button className="mt-1 bt-1" onClick={handleSignOut}>Sign Out</Button>
             </div>
           
             <div>
