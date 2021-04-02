@@ -6,7 +6,6 @@ export const getNextBirthday = (birthdayObj) => {
     const nextDay = birthdayObj.birthday
   let nextBDay = new Date();
   console.log(birthdayObj.name)
-    console.log(todayMonth,nextMonth, todayMonth < nextMonth)
   if (todayMonth < nextMonth) {
       nextBDay = new Date(today.getFullYear(),birthdayObj.birthmonth,birthdayObj.birthday)
     } else if (todayDay > nextDay) {
