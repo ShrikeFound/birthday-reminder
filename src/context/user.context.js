@@ -39,8 +39,8 @@ export const UserProvider = ({ children }) => {
           try {
             const currentToken = await messaging.getToken()
             if (currentToken) {
-              await db.ref(`./fcm_tokens/${currentToken}`).set(authObject.uid)
-              console.log("token success")
+              await db.ref(`/fcm_tokens/${currentToken}`).set(authObject.uid)
+              // console.log("token success")
             }
 
           } catch (err) {
@@ -48,7 +48,7 @@ export const UserProvider = ({ children }) => {
           }
 
         } else {
-          console.log("no messaging :(")
+          console.log("no notifications :(")
         }
 
 
