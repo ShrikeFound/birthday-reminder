@@ -1,5 +1,5 @@
 import React,{ createContext, useContext, useEffect, useState } from "react";
-import { auth, db } from "../misc/firebase";
+import { auth, db, messaging } from "../misc/firebase";
 
 
 const UserContext = createContext()
@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
     
     let userRef;
 
-    const unsubscribe = auth.onAuthStateChanged(authObject => {
+    const unsubscribe = auth.onAuthStateChanged(async authObject => {
       if (authObject) {
         
 
@@ -34,7 +34,26 @@ export const UserProvider = ({ children }) => {
 
         });
 
-        
+
+        if (messaging) {
+          try {
+            const currentToken = await messaging.getToken()
+            if (currentToken) {
+              await db.ref(`./fcm_tokens/${currentToken}`).set(authObject.uid)
+              console.log("token success")
+            }
+
+          } catch (err) {
+            console.log("error!", err);
+          }
+
+        } else {
+          console.log("no messaging :(")
+        }
+
+
+
+
 
       } else {
        
@@ -52,6 +71,10 @@ export const UserProvider = ({ children }) => {
 
 
   },[])
+
+
+
+
 
 
   return <UserContext.Provider value={{ loading, user }}>
