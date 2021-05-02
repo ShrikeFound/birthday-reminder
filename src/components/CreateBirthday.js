@@ -36,7 +36,6 @@ const CreateBirthday = () => {
       createdAt: firebase.database.ServerValue.TIMESTAMP,
     }
 
-    console.log(typeof birthdayData.birthday, typeof birthdayData.createdAt)
     try {
       await db.ref(`birthdays/${user.uid}`).push(birthdayData);
 

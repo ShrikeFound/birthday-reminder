@@ -23,6 +23,35 @@ const messaging = admin.messaging();
 // exports.sendReminder = sendReminder;
 
 exports.timerUpdate = functions.pubsub.schedule("*/2 * * * *").onRun(async (context) => {
+
+
+  const getNextBirthday = (birthdayObj) => {
+    const today = new Date();
+    const todayMonth = today.getMonth();
+    const todayDay = today.getDate();
+    const nextMonth = birthdayObj.birthmonth
+    const nextDay = birthdayObj.birthday
+  let nextBDay = new Date();
+  if (todayMonth < nextMonth) {
+      nextBDay = new Date(today.getFullYear(),birthdayObj.birthmonth,birthdayObj.birthday)
+    } else if (todayMonth === nextMonth && todayDay <= nextDay) {
+    nextBDay = new Date(today.getFullYear(), birthdayObj.birthmonth, birthdayObj.birthday)
+    } else {
+    nextBDay = new Date(today.getFullYear()+1, birthdayObj.birthmonth, birthdayObj.birthday)
+    }
+    
+    return nextBDay
+  }
+
+
+
+
+
+
+
+
+
+
   const ref = await db.ref("fcm_tokens").once("value");
   if (!ref.exists) return false;
   const users = ref.val();
@@ -36,7 +65,12 @@ exports.timerUpdate = functions.pubsub.schedule("*/2 * * * *").onRun(async (cont
 
     //if there is a birthday for this month
     const birthdaysThisMonth = Object.values(birthdays.val()).filter((b) => {
-      return b.birthmonth === currentMonth
+      console.log(`===========${b.name}===========`)
+      console.log("next birthday date: ",getNextBirthday(b).getTime()," | ",typeof getNextBirthday(b).getTime())
+      console.log("today's date: ",currentDate.getTime()," | ",typeof currentDate.getTime())
+      const daysTill = (getNextBirthday(b) - currentDate.getTime()) / ( 1000 * 2600 * 24) 
+      console.log(daysTill, daysTill <= 14)
+      return (daysTill <= 14) 
     })
     console.log(birthdaysThisMonth.length)
     if (birthdaysThisMonth.length >= 1) {
@@ -47,7 +81,7 @@ exports.timerUpdate = functions.pubsub.schedule("*/2 * * * *").onRun(async (cont
   }
 
   console.log(`results (${usersToBeMessaged.length}): `,usersToBeMessaged)
-
+  if (usersToBeMessaged <= 0) return false;
   const message = {
     notification: {
       title: "Upcoming Birthdays!",
@@ -71,6 +105,13 @@ exports.timerUpdate = functions.pubsub.schedule("*/2 * * * *").onRun(async (cont
     console.log("no message failures!");
     }
 
+
+  const removedPromises = failedTokens.map(token => db.ref(`/fcm_tokens/${token}`).remove())
+
+
+
+
+
   // const userArray = Object.values(users);
   // //for each user, get their birthdays
   // userArray.forEach(async user => {
@@ -85,5 +126,5 @@ exports.timerUpdate = functions.pubsub.schedule("*/2 * * * *").onRun(async (cont
   //do stuff
 
   console.log("scheduled function complete.")
-  return true
+  return Promise.all(removedPromises).catch(err => err.message)
 });

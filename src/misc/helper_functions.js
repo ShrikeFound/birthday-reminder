@@ -7,8 +7,8 @@ export const getNextBirthday = (birthdayObj) => {
   let nextBDay = new Date();
   if (todayMonth < nextMonth) {
       nextBDay = new Date(today.getFullYear(),birthdayObj.birthmonth,birthdayObj.birthday)
-    } else if (todayDay > nextDay) {
-    nextBDay = new Date(today.getFullYear() + 1, birthdayObj.birthmonth, birthdayObj.birthday)
+    } else if (todayMonth === nextMonth && todayDay <= nextDay) {
+    nextBDay = new Date(today.getFullYear(), birthdayObj.birthmonth, birthdayObj.birthday)
     } else {
     nextBDay = new Date(today.getFullYear()+1, birthdayObj.birthmonth, birthdayObj.birthday)
     }

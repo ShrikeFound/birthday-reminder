@@ -15,7 +15,7 @@ const PublicRoute = ({ children, ...routeProps }) => {
 
 
   if (user && !loading) {
-    console.log("there's a user signed on, dont' look at the signin page")
+    // console.log("there's a user signed on, dont' look at the signin page")
     return <Redirect to="/"/>
   }
   return (

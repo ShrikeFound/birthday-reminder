@@ -3,10 +3,10 @@
     "rules": "database.rules.json"
   },
   "functions": {
-    "predeploy": ["npm run build"],
     "source": "functions"
   },
   "hosting": {
+    "predeploy": ["npm run build"],
     "public": "build",
     "ignore": [
       "firebase.json",

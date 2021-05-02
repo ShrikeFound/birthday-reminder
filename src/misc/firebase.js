@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/messaging'
-import { Message } from 'rsuite';
+// import { Message } from 'rsuite';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCKKbdONGUJaLAcH0RVXknSGksbppoqVYc",

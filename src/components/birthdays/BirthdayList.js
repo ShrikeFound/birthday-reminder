@@ -13,7 +13,9 @@ const BirthdayList = (userID) => {
     const nextBirthdayB = getNextBirthday(b)
     return nextBirthdayA - nextBirthdayB
   })
-  
+  birthdays.forEach(b => {
+    console.log(getNextBirthday(b))
+  });
   return (
     <div>
       <ul className="birthday-list">
