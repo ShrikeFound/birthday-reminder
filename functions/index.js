@@ -85,7 +85,7 @@ exports.timerUpdate = functions.pubsub.schedule("*/2 * * * *").onRun(async (cont
   const message = {
     notification: {
       title: "Upcoming Birthdays!",
-      body: "You have birthdays coming up this month!"
+      body: "You have birthdays coming up within the next 2 weeks!"
     },
     tokens: usersToBeMessaged
   }
